@@ -4,6 +4,7 @@
 const PORT = 8080;
 const HOST = '0.0.0.0';
 
+
 // Setup empty JS object to act as endpoint for all routes with data:
 // temperature
 // date
