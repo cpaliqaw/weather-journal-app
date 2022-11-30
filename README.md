@@ -1,26 +1,40 @@
 # Weather-Journal App Project
 
 ## Overview
-This project requires you to create an asynchronous web app that uses Web API and user data to dynamically update the UI. 
+An asynchronous web app that uses Web API and user data to dynamically update the UI
 
-## Instructions
-This will require modifying the `server.js` file and the `website/app.js` file. You can see `index.html` for element references, and once you are finished with the project steps, you can use `style.css` to style your application to customized perfection.
+## Npm Instructions
+- From within the project directory, run
+```
+npm install
+node ./server.js
+```
+- Open your web browser to [http://localhost:8080/](http://localhost:8080/).
 
-## Extras
-If you are interested in testing your code as you go, you can use `tests.js` as a template for writing and running some basic tests for your code.
+## Docker Instructions
 
-## Useful Docker commands
-
+- [Install Docker](https://docs.docker.com/get-docker/)
+- From within the project directory, run
+```
 docker build . -t weather-journal-app:0.1
-
 docker run -p 49160:8080 -d weather-journal-app:0.1
+```
+- Open your web browser to [http://localhost:49160/](http://localhost:49160/).
 
-docker logs cool_moore
+## Other Useful Docker commands
 
-docker logs -f cool_moore
+- Get your container's name
+  
+  `docker ps`
+- Look at its output
 
-docker kill cool_moore
+  `docker logs \[container_name\]`
+- Follow its output
 
-docker exec -it cool_moore /bin/bas
-
-curl -i localhost:49160
+  `docker logs -f \[container_name\]`
+- Kill it
+  
+  `docker kill \[container_name\]`
+- Open up a shell within the container
+  
+  `docker exec -it \[container_name\] /bin/bash`
