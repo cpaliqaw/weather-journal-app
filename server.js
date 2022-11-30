@@ -41,8 +41,9 @@ app.use(express.static('website'));
 
 // Setup Server
 
-app.get('/hello', (req, res) => {
-    res.send('Hello World');
+app.post('/addEntry', (req, res) => {
+    projectData.journalEntries.push(req.body);
+    res.send(projectData.journalEntries[projectData.journalEntries.length - 1]);
 });
 
 app.get('/entries', (req, res) => {

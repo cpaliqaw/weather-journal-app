@@ -17,7 +17,7 @@ const OPEN_WEATHER_API_KEY = "9b246284975098f082c47160b6db6921";
 const getWeather = async (zipCode) => {
     const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},${COUNTRY_CODE}&appid=${OPEN_WEATHER_API_KEY}`;
     console.log(url);
-    
+
     const response = await fetch(url);
 
     try {
@@ -35,4 +35,25 @@ generateButton.addEventListener('click', () => {
     const result = getWeather(zipCode);
     console.log(result);
 });
+
+const postData = async (data) => {
+    console.log(data);
+    const response = await fetch('/addEntry', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        // Body data type must match "Content-Type" header        
+        body: JSON.stringify(data),
+    });
+
+    try {
+        const newData = await response.json();
+        console.log(newData);
+        return newData;
+    } catch (error) {
+        console.log("error", error);
+    }
+}
 
