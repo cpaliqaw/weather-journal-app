@@ -16,7 +16,7 @@ const projectData = {
                 key: 4,
                 temperatureCelsius: 45.5,
                 date: new Date("2021-01-01"),
-                userResponse: "SAD makes me sad...",
+                feelings: "SAD makes me sad...",
             }
         ]
 };

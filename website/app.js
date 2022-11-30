@@ -3,10 +3,6 @@ const COUNTRY_CODE = 'us';
 
 const OPEN_WEATHER_API_KEY = "9b246284975098f082c47160b6db6921";
 
-// Create a new date instance dynamically with JS
-// let d = new Date();
-// let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
-
 // Acquire API credentials from OpenWeatherMap website. Use your credentials and the base url to create global variables at the top of your app.js code.
 // Write an async function in app.js that uses fetch() to make a GET request to the OpenWeatherMap API.
 // Create an event listener for the element with the id: generate, with a callback function to execute when it is clicked.
@@ -32,12 +28,24 @@ const generateButton = document.querySelector('#generate');
 generateButton.addEventListener('click', () => {
     console.log("generate");
     const zipCode = document.querySelector('#zip').value;
-    const result = getWeather(zipCode);
-    console.log(result);
+    getWeather(zipCode)
+        .then( (data) => postData(data))
+        .then( (entry) => console.log(entry));
 });
 
 const postData = async (data) => {
-    console.log(data);
+    const temperatureKelvin = data.main.temp;
+    const temperatureCelsius = temperatureKelvin - 273.15;
+    const d = new Date();
+    let date = (d.getMonth()+1)+'.'+ d.getDate()+'.'+ d.getFullYear();
+    let feelings = document.querySelector('#feelings').value;
+    let key = crypto.randomUUID();
+    let entry = {
+        key,
+        temperatureCelsius,
+        date,
+        feelings
+    };
     const response = await fetch('/addEntry', {
         method: 'POST',
         credentials: 'same-origin',
@@ -45,12 +53,11 @@ const postData = async (data) => {
             'Content-Type': 'application/json',
         },
         // Body data type must match "Content-Type" header        
-        body: JSON.stringify(data),
+        body: JSON.stringify(entry),
     });
 
     try {
         const newData = await response.json();
-        console.log(newData);
         return newData;
     } catch (error) {
         console.log("error", error);
