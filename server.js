@@ -4,8 +4,21 @@
 const PORT = 8080;
 const HOST = '0.0.0.0';
 
-// Setup empty JS object to act as endpoint for all routes
-const projectData = {};
+// Setup empty JS object to act as endpoint for all routes with data:
+// temperature
+// date
+// user response
+const projectData = {
+    journalEntries:
+        [
+            {
+                key: 4,
+                temperatureCelsius: 45.5,
+                date: new Date("2021-01-01"),
+                userResponse: "SAD makes me sad...",
+            }
+        ]
+};
 
 // Require Express to run server and routes
 const express = require('express');
@@ -29,6 +42,10 @@ app.use(express.static('website'));
 
 app.get('/hello', (req, res) => {
     res.send('Hello World');
+});
+
+app.get('/entries', (req, res) => {
+    res.send(projectData.journalEntries);
 });
 
 app.listen(PORT, HOST, () => {
