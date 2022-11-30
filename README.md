@@ -8,3 +8,19 @@ This will require modifying the `server.js` file and the `website/app.js` file. 
 
 ## Extras
 If you are interested in testing your code as you go, you can use `tests.js` as a template for writing and running some basic tests for your code.
+
+## Useful Docker commands
+
+docker build . -t weather-journal-app:0.1
+
+docker run -p 49160:8080 -d weather-journal-app:0.1
+
+docker logs cool_moore
+
+docker logs -f cool_moore
+
+docker kill cool_moore
+
+docker exec -it cool_moore /bin/bas
+
+curl -i localhost:49160
