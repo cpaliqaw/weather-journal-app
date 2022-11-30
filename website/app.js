@@ -3,6 +3,8 @@ const COUNTRY_CODE = 'us';
 
 const OPEN_WEATHER_API_KEY = "9b246284975098f082c47160b6db6921";
 
+const TEMPERATURE_FORMATTER = new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 1 });
+
 // Acquire API credentials from OpenWeatherMap website. Use your credentials and the base url to create global variables at the top of your app.js code.
 // Write an async function in app.js that uses fetch() to make a GET request to the OpenWeatherMap API.
 // Create an event listener for the element with the id: generate, with a callback function to execute when it is clicked.
@@ -30,7 +32,7 @@ generateButton.addEventListener('click', () => {
     const zipCode = document.querySelector('#zip').value;
     getWeather(zipCode)
         .then( (data) => postData(data))
-        .then( (entry) => console.log(entry));
+        .then( (entry) => updateMostRecentEntry(entry));
 });
 
 const postData = async (data) => {
@@ -62,5 +64,22 @@ const postData = async (data) => {
     } catch (error) {
         console.log("error", error);
     }
+}
+
+    // <div class="holder entry">
+    //   <div class="title">Most Recent Entry</div>
+    //   <div id="entryHolder">
+    //     <div id="date"></div>
+    //     <div id="temp"></div>
+    //     <div id="content"></div>
+    //   </div>
+    // </div>
+const updateMostRecentEntry = (entry) => {
+    const date = document.querySelector("#date");
+    date.innerText = entry.date;
+    const temp = document.querySelector("#temp");
+    temp.innerText = `${TEMPERATURE_FORMATTER.format(entry.temperatureCelsius)} ° Celsius`;
+    const content = document.querySelector("#content");
+    content.innerText = entry.feelings;
 }
 
