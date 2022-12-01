@@ -1,8 +1,7 @@
 /* Global Variables */
 const COUNTRY_CODE = 'us';
 
-const OPEN_WEATHER_API_KEY = '9b246284975098f082c47160b6db6921';
-const TEMPERATURE_UNIT = 'metric'
+const OPEN_WEATHER_API_KEY = '9b246284975098f082c47160b6db6921&units=metric';
 const TEMPERATURE_FORMATTER = new Intl.NumberFormat('en-US', { maximumSignificantDigits: 1 });
 
 // Acquire API credentials from OpenWeatherMap website. Use your credentials and the base url to create global variables at the top of your app.js code.
@@ -13,7 +12,7 @@ const TEMPERATURE_FORMATTER = new Intl.NumberFormat('en-US', { maximumSignifican
 // user entered zip code (see input in html with id zip)
 // personal API key
 const getWeather = async (zipCode) => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},${COUNTRY_CODE}&appid=${OPEN_WEATHER_API_KEY}&units=${TEMPERATURE_UNIT}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},${COUNTRY_CODE}&appid=${OPEN_WEATHER_API_KEY}`;
     console.log(url);
 
     const response = await fetch(url);
